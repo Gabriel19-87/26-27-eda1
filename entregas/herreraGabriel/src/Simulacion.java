@@ -13,7 +13,7 @@ public class Simulacion {
 
     public void ejecutar() {
         for (int minuto = 1; minuto <= this.minutosTotales; minuto++) {
-            
+
             this.fila.actualizarTiempos();
 
             if (Math.random() < 0.6) {
@@ -51,6 +51,8 @@ public class Simulacion {
             if (minuto % 15 == 0 && this.fila.getLongitud() > 25) {
                 System.out.println("[Minuto " + minuto + "] : Pasen por esta caja en orden de fila.");
             }
+
+            System.out.println("Minuto " + minuto + "  - Longitud de la fila: " + this.fila.getLongitud() + " metros.");
         }
     }
 
