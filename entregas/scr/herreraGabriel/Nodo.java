@@ -1,4 +1,4 @@
-package listas.nodoDummy;
+package entregas.scr.herreraGabriel;
 
 class Nodo {
     int dato;

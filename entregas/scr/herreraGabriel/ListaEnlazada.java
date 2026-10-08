@@ -1,5 +1,4 @@
-package listas.nodoDummy;
-
+package entregas.scr.herreraGabriel;
 class ListaEnlazada {
     private Nodo cabeza;
 
@@ -17,12 +16,12 @@ class ListaEnlazada {
     public void insertarEnPosicion(int posicion, int dato) {
         Nodo dummy = new Nodo(-1);
         dummy.siguiente = cabeza;
-
+        
         Nodo actual = dummy;
         for (int pasos = 0; actual.siguiente != null && pasos < posicion; pasos++) {
             actual = actual.siguiente;
         }
-
+        
         Nodo nuevoNodo = new Nodo(dato);
         nuevoNodo.siguiente = actual.siguiente;
         actual.siguiente = nuevoNodo;
@@ -48,8 +47,8 @@ class ListaEnlazada {
     public void eliminarPorValor(int valor) {
         Nodo dummy = new Nodo(-1);
         dummy.siguiente = cabeza;
-
-        for (Nodo actual = dummy; actual.siguiente != null;) {
+        
+        for (Nodo actual = dummy; actual.siguiente != null; ) {
             if (actual.siguiente.dato == valor) {
                 actual.siguiente = actual.siguiente.siguiente;
             } else {
@@ -67,7 +66,7 @@ class ListaEnlazada {
             return;
         }
 
-        for (Nodo actual = cabeza; actual.siguiente != null;) {
+        for (Nodo actual = cabeza; actual.siguiente != null; ) {
             if (actual.siguiente.dato == valor) {
                 actual.siguiente = actual.siguiente.siguiente;
             } else {
@@ -75,12 +74,11 @@ class ListaEnlazada {
             }
         }
     }
-
-    public void eliminarRepetidos() {
+public void eliminarRepetidos() {
         Nodo dummy = new Nodo(-1);
         dummy.siguiente = cabeza;
-
-        for (Nodo previo = dummy, actual = cabeza; actual != null;) {
+        
+        for (Nodo previo = dummy, actual = cabeza; actual != null; ) {
             if (actual.siguiente != null && actual.dato == actual.siguiente.dato) {
                 int valorDuplicado = actual.dato;
                 for (; actual != null && actual.dato == valorDuplicado; actual = actual.siguiente) {
@@ -117,3 +115,4 @@ class ListaEnlazada {
             }
         }
     }
+}
