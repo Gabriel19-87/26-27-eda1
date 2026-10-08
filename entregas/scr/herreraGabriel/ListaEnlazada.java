@@ -8,10 +8,8 @@ class ListaEnlazada {
     }
 
     public void imprimirLista() {
-        Nodo actual = cabeza;
-        while (actual != null) {
+        for (Nodo actual = cabeza; actual != null; actual = actual.siguiente) {
             System.out.print(actual.dato + " -> ");
-            actual = actual.siguiente;
         }
         System.out.println("null");
     }
@@ -19,12 +17,12 @@ class ListaEnlazada {
     public void insertarEnPosicion(int posicion, int dato) {
         Nodo dummy = new Nodo(-1);
         dummy.siguiente = cabeza;
+
         Nodo actual = dummy;
-        int pasos = 0;
-        while (actual.siguiente != null && pasos < posicion) {
+        for (int pasos = 0; actual.siguiente != null && pasos < posicion; pasos++) {
             actual = actual.siguiente;
-            pasos++;
         }
+
         Nodo nuevoNodo = new Nodo(dato);
         nuevoNodo.siguiente = actual.siguiente;
         actual.siguiente = nuevoNodo;
@@ -40,10 +38,8 @@ class ListaEnlazada {
         }
 
         Nodo actual = cabeza;
-        int pasos = 1;
-        while (actual.siguiente != null && pasos < posicion) {
+        for (int pasos = 1; actual.siguiente != null && pasos < posicion; pasos++) {
             actual = actual.siguiente;
-            pasos++;
         }
         nuevoNodo.siguiente = actual.siguiente;
         actual.siguiente = nuevoNodo;
@@ -52,8 +48,8 @@ class ListaEnlazada {
     public void eliminarPorValor(int valor) {
         Nodo dummy = new Nodo(-1);
         dummy.siguiente = cabeza;
-        Nodo actual = dummy;
-        while (actual.siguiente != null) {
+
+        for (Nodo actual = dummy; actual.siguiente != null;) {
             if (actual.siguiente.dato == valor) {
                 actual.siguiente = actual.siguiente.siguiente;
             } else {
@@ -64,16 +60,14 @@ class ListaEnlazada {
     }
 
     public void eliminarPorValorSinDummy(int valor) {
-        while (cabeza != null && cabeza.dato == valor) {
-            cabeza = cabeza.siguiente;
+        for (; cabeza != null && cabeza.dato == valor; cabeza = cabeza.siguiente) {
         }
 
         if (cabeza == null) {
             return;
         }
 
-        Nodo actual = cabeza;
-        while (actual.siguiente != null) {
+        for (Nodo actual = cabeza; actual.siguiente != null;) {
             if (actual.siguiente.dato == valor) {
                 actual.siguiente = actual.siguiente.siguiente;
             } else {
@@ -81,4 +75,45 @@ class ListaEnlazada {
             }
         }
     }
-}
+
+    public void eliminarRepetidos() {
+        Nodo dummy = new Nodo(-1);
+        dummy.siguiente = cabeza;
+
+        for (Nodo previo = dummy, actual = cabeza; actual != null;) {
+            if (actual.siguiente != null && actual.dato == actual.siguiente.dato) {
+                int valorDuplicado = actual.dato;
+                for (; actual != null && actual.dato == valorDuplicado; actual = actual.siguiente) {
+                }
+                previo.siguiente = actual;
+            } else {
+                previo = actual;
+                actual = actual.siguiente;
+            }
+        }
+        cabeza = dummy.siguiente;
+    }
+
+    public void eliminarRepetidosSinDummy() {
+        for (; cabeza != null && cabeza.siguiente != null && cabeza.dato == cabeza.siguiente.dato; ) {
+            int valorDuplicado = cabeza.dato;
+            for (; cabeza != null && cabeza.dato == valorDuplicado; cabeza = cabeza.siguiente) {
+            }
+        }
+
+        if (cabeza == null) {
+            return;
+        }
+
+        for (Nodo previo = cabeza, actual = cabeza.siguiente; actual != null; ) {
+            if (actual.siguiente != null && actual.dato == actual.siguiente.dato) {
+                int valorDuplicado = actual.dato;
+                for (; actual != null && actual.dato == valorDuplicado; actual = actual.siguiente) {
+                }
+                previo.siguiente = actual;
+            } else {
+                previo = actual;
+                actual = actual.siguiente;
+            }
+        }
+    }
